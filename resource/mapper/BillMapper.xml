@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.marry.dao.BillMapper">
+  <resultMap id="BaseResultMap" type="cn.marry.pojo.Bill">
+    <id column="bid" jdbcType="INTEGER" property="bid" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="pName" jdbcType="VARCHAR" property="pname" />
+    <result column="pPrice" jdbcType="DOUBLE" property="pprice" />
+    <result column="pImage" jdbcType="VARCHAR" property="pimage" />
+    <result column="pCount" jdbcType="INTEGER" property="pcount" />
+    <result column="totalPrice" jdbcType="DOUBLE" property="totalprice" />
+    <result column="modifyBy" jdbcType="INTEGER" property="modifyby" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bill
+    where bid = #{bid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.marry.pojo.Bill">
+    insert into bill (bid, pid, uid, 
+      pName, pPrice, pImage, 
+      pCount, totalPrice, modifyBy, 
+      modifyDate)
+    values (#{bid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
+      #{pname,jdbcType=VARCHAR}, #{pprice,jdbcType=DOUBLE}, #{pimage,jdbcType=VARCHAR}, 
+      #{pcount,jdbcType=INTEGER}, #{totalprice,jdbcType=DOUBLE}, #{modifyby,jdbcType=INTEGER}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.marry.pojo.Bill">
+    update bill
+    set pid = #{pid,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      pName = #{pname,jdbcType=VARCHAR},
+      pPrice = #{pprice,jdbcType=DOUBLE},
+      pImage = #{pimage,jdbcType=VARCHAR},
+      pCount = #{pcount,jdbcType=INTEGER},
+      totalPrice = #{totalprice,jdbcType=DOUBLE},
+      modifyBy = #{modifyby,jdbcType=INTEGER},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where bid = #{bid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select bid, pid, uid, pName, pPrice, pImage, pCount, totalPrice, modifyBy, modifyDate
+    from bill
+    where bid = #{bid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bid, pid, uid, pName, pPrice, pImage, pCount, totalPrice, modifyBy, modifyDate
+    from bill
+  </select>
+</mapper>

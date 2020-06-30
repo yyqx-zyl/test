@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.marry.dao.ProdressMapper">
+  <resultMap id="BaseResultMap" type="cn.marry.pojo.Prodress">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="dName" jdbcType="VARCHAR" property="dname" />
+    <result column="dDesc" jdbcType="VARCHAR" property="ddesc" />
+    <result column="dprice" jdbcType="DOUBLE" property="dprice" />
+    <result column="idPicPath" jdbcType="VARCHAR" property="idpicpath" />
+    <result column="createdBy" jdbcType="INTEGER" property="createdby" />
+    <result column="creationDate" jdbcType="TIMESTAMP" property="creationdate" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+    <result column="modifyBy" jdbcType="INTEGER" property="modifyby" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pro_dress
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.marry.pojo.Prodress">
+    insert into pro_dress (pid, dName, dDesc, 
+      dprice, idPicPath, createdBy, 
+      creationDate, modifyDate, modifyBy
+      )
+    values (#{pid,jdbcType=INTEGER}, #{dname,jdbcType=VARCHAR}, #{ddesc,jdbcType=VARCHAR}, 
+      #{dprice,jdbcType=DOUBLE}, #{idpicpath,jdbcType=VARCHAR}, #{createdby,jdbcType=INTEGER}, 
+      #{creationdate,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.marry.pojo.Prodress">
+    update pro_dress
+    set dName = #{dname,jdbcType=VARCHAR},
+      dDesc = #{ddesc,jdbcType=VARCHAR},
+      dprice = #{dprice,jdbcType=DOUBLE},
+      idPicPath = #{idpicpath,jdbcType=VARCHAR},
+      createdBy = #{createdby,jdbcType=INTEGER},
+      creationDate = #{creationdate,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyby,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select pid, dName, dDesc, dprice, idPicPath, createdBy, creationDate, modifyDate, 
+    modifyBy
+    from pro_dress
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select pid, dName, dDesc, dprice, idPicPath, createdBy, creationDate, modifyDate, 
+    modifyBy
+    from pro_dress
+  </select>
+</mapper>
